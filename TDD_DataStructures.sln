@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{09255558-B157-43C9-9B0D-43CA8F35F0C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestDataStructuresAlgorithms", "XUnitTestProject1\XUnitTestDataStructuresAlgorithms.csproj", "{09255558-B157-43C9-9B0D-43CA8F35F0C3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DS", "DS\DS.csproj", "{48517AAE-14B6-4C74-BE1B-FF1E0F3607A6}"
 EndProject
