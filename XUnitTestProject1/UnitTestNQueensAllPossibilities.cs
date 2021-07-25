@@ -14,8 +14,11 @@ namespace XUnitTestProject1
         {
             int N = 4;
             string[,] board = new string[N, N];
-            
-            IList<IList<string>> ResultList = NQueensAllPossibilities.SolveNQueens(N);
+
+            NQueensAllPossibilities qp = new NQueensAllPossibilities();
+
+
+            IList<IList<string>> ResultList = qp.SolveNQueens(N);
             Assert.True(true);
 
             //string[,] expectedBoard =
@@ -27,6 +30,31 @@ namespace XUnitTestProject1
 
             //};
             //board.Should().BeEquivalentTo(expectedBoard);
+            IList<IList<string>> expectedResult = new List<IList<string>>();
+            List<String> pos1 = new List<string>();
+            string row1 = ".Q..";
+            pos1.Add(row1);
+            row1 = "...Q";
+            pos1.Add(row1);
+            row1 = "Q...";
+            pos1.Add(row1);
+            row1 = "..Q.";
+            pos1.Add(row1);
+
+            expectedResult.Add(pos1);
+
+            pos1 = new List<string>();
+            row1 = "..Q.";
+            pos1.Add(row1);
+            row1 = "Q...";
+            pos1.Add(row1);
+            row1 = "...Q";
+            pos1.Add(row1);
+            row1 = ".Q..";
+            pos1.Add(row1);
+
+            expectedResult.Add(pos1);
+            ResultList.Should().BeEquivalentTo(expectedResult);
         }
     }
 }

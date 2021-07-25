@@ -1,89 +1,144 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DS
 {
-    public static class NQueensAllPossibilities
+    public class NQueensAllPossibilities
     {
-        public static IList<IList<string>> ResultList { get; set; }
-        public static StringBuilder stringBuilder { get; set; }
-        public static IList<string> TempList { get; set; }
-        public static string[,] board { get; set; }
-        public static IList<IList<string>> SolveNQueens(int n)
-        {
-            board = new string[n,n];
-            ResultList = new List<IList<string>>();
-            TempList = new List<string>();
+        public IList<IList<string>> possibilities { get; set; }
+        public Dictionary<int, bool> ColsHashTable { get; set; }
+        public Dictionary<int, bool> RowsHashTable { get; set; }
+        public Dictionary<int, bool> PositiveDiagonalsHashTable { get; set; }
+        public Dictionary<int, bool> NegativeDiagonalsHashTable { get; set; }
+        public string[,] Board { get; set; }
 
-            stringBuilder = new StringBuilder();
-            bool IsQueen = NQueens(board, n);
-            if(IsQueen == true)
-            {
-                ResultList.Add(TempList);
-            }
-            return ResultList;
-        }
-        public static bool NQueens(string[,] board, int N)
-        {            
-            //If N = No of Queens
-            if (N == 0)
-            {
-                return true;
-            }
-            int rows = board.GetLength(0);
-            int cols = board.GetLength(1);
-            stringBuilder = new StringBuilder();
-            for (int i = 0; i < rows; i++)
-            {             
-                for (int j = 0; j < cols; j++)
-                {         
-                    if (IsAttacked(board, N, i, j, rows, cols))
-                    {
-                        continue;
-                    }
-                    board[i,j] = "Q";
-                    stringBuilder.Append("Q");
-                    if (NQueens(board, N - 1) == true)
-                    {
-                        return true;
-                    }
-                    board[i,j] = ".";
-                    stringBuilder.Append(".");
-                }
-                TempList.Add(stringBuilder.ToString());
-                stringBuilder = new StringBuilder();
-            }
-           
-            return false;
-        }
-        public static bool IsAttacked(string[,] board, int N, int x, int y, int rows, int cols)
+        public NQueensAllPossibilities()
         {
-            for (int j = 0; j < cols; j++)
+            possibilities = new List<IList<string>>();
+
+        }
+        public IList<IList<string>> SolveNQueens(int n)
+        {
+            possibilities = new List<IList<string>>();
+            // Populate the Board 
+            this.InitialiseBoard(n);
+            this.ColsHashTable = new Dictionary<int, bool>();
+            this.RowsHashTable = new Dictionary<int, bool>();
+            this.PositiveDiagonalsHashTable = new Dictionary<int, bool>();
+            this.NegativeDiagonalsHashTable = new Dictionary<int, bool>();
+
+
+            SolveBackTrackQueen(n, 0);
+            return possibilities;
+        }
+        private void SolveBackTrackQueen(int n, int row)
+        {
+            if(row==n)
             {
-                if (board[x,j]=="Q")
+                //1 Possibility Reached because we have placed all the Queens. 
+                possibilities.Add(this.ConvertBoardToList());            
+            }
+            for (int j = 0; j < n; j++)
+            {
+                if (IsValidPlacement(row, j) == false)
                 {
-                    return true;
+                    continue;
+                }
+                Board[row, j] = "Q";
+                this.SavePlacementInHashTable(row, j);
+
+                SolveBackTrackQueen(n, row+1);
+                                          
+                Board[row, j] = ".";
+                this.RemovePlaceInHashTable(row, j);
+            }      
+        }
+        private void InitialiseBoard(int n)
+        {
+            Board = new string[n, n];
+            for (int row = 0; row < n; row++)
+            {
+                for (int col = 0; col < n; col++)
+                {
+                    Board[row, col] = ".";
                 }
             }
-            for (int i = 0; i < rows; i++)
+        }
+        private List<string> ConvertBoardToList()
+        {
+            int N = Board.GetLength(0);
+            List<string> rowList = new List<string>();
+            for (int row = 0; row < N; row++)
             {
-                if (board[i,y]=="Q")
+                String rowValues = "";
+                for (int col = 0; col < N; col++)
                 {
-                    return true;
+                    rowValues= String.Concat(rowValues,Board[row, col]);
                 }
+                rowList.Add(rowValues);
             }
-            for (int i = 0; i < rows; i++)
+            return rowList;
+        }
+        private bool IsValidPlacement(int row, int col)
+        {
+            if (this.ColsHashTable.ContainsKey(col))
             {
-                for (int j = 0; j < cols; j++)
-                {
-                    if (board[i,j] == "Q")
-                    {
-                        return true;
-                    }
-                }
+                return false;
             }
-            return false;
+            if (this.RowsHashTable.ContainsKey(row))
+            {
+                return false;
+            }
+            if (this.PositiveDiagonalsHashTable.ContainsKey(row + col))
+            {
+                return false;
+            }
+            if (this.NegativeDiagonalsHashTable.ContainsKey(row - col))
+            {
+                return false;
+            }
+            return true;
+        }
+        private void SavePlacementInHashTable(int row, int col)
+        {
+            if (!this.ColsHashTable.ContainsKey(col))
+            {
+                this.ColsHashTable.Add(col, true);
+            }
+            if (!this.RowsHashTable.ContainsKey(row))
+            {
+                this.RowsHashTable.Add(row, true);
+            }
+            if (!this.PositiveDiagonalsHashTable.ContainsKey(row + col))
+            {
+                this.PositiveDiagonalsHashTable.Add(row + col, true);
+            }
+            if (!this.NegativeDiagonalsHashTable.ContainsKey(row - col))
+            {
+                this.NegativeDiagonalsHashTable.Add(row - col, true);
+            }
+        }
+        private void RemovePlaceInHashTable(int row, int col)
+        {
+            if (this.ColsHashTable.ContainsKey(col))
+            {
+                this.ColsHashTable.Remove(col);
+            }
+            if (this.RowsHashTable.ContainsKey(row))
+            {
+                this.RowsHashTable.Remove(row);
+            }
+            if (this.PositiveDiagonalsHashTable.ContainsKey(row + col))
+            {
+                this.PositiveDiagonalsHashTable.Remove(row + col);
+            }
+            if (this.NegativeDiagonalsHashTable.ContainsKey(row - col))
+            {
+                this.NegativeDiagonalsHashTable.Remove(row - col);
+            }
         }
     }
 }
