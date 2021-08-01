@@ -1,3 +1,3 @@
 # TDD_DataStructures
 
-Data Structure and Algorithm Practice of Leetcode Questions and Other Sources
+Practice Data Structure and Algorithm Leetcode Questions and Questiosn from Other Sources
