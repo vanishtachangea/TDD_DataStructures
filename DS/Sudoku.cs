@@ -64,10 +64,12 @@ namespace DS
                     }
                 }
                 else
+                { 
                     if(SolveBackTrackSudoku(board, n, val, i + 1, 0)==true)
                     {
                         return true;
                     }
+                }
 
                 board[i][j] = '.';
                 RemovePlacement(i, j, val, boxId);

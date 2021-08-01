@@ -5,7 +5,7 @@ using Xunit;
 using DS;
 using FluentAssertions;
 
-namespace XUnitTestProject1
+namespace XUnitTestDataStructuresAlgorithms
 {
 
     public class UnitTestLongestCommonSubsequence

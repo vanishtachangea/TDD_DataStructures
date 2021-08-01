@@ -4,7 +4,7 @@ using Xunit;
 using DS;
 using System.Collections.Generic;
 
-namespace XUnitTestProject1
+namespace XUnitTestDataStructuresAlgorithms
 {
     /// <summary>
     /// https://leetcode.com/problems/min-cost-climbing-stairs/

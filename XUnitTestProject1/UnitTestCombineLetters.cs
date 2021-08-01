@@ -4,7 +4,7 @@ using Xunit;
 using DS;
 using System.Collections.Generic;
 
-namespace XUnitTestProject1
+namespace XUnitTestDataStructuresAlgorithms
 {
     public class UnitTestCombineLetters
     {
