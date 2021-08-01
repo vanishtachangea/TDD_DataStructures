@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using DS;
+using Xunit.Abstractions;
 
 namespace XUnitTestDataStructuresAlgorithms
 {
     public class UnitTestTrappingWater
     {
         private ITrappingWater trappingWater;
-        public UnitTestTrappingWater(ITrappingWater trappingWater)
+        private readonly ITestOutputHelper output;
+        public UnitTestTrappingWater(ITrappingWater trappingWater, ITestOutputHelper  output)
         {
             this.trappingWater = trappingWater;
+            this.output = output;
         }
         [Fact]
         public void ShouldReturnAmountOfWaterTrapped()
@@ -21,10 +24,28 @@ namespace XUnitTestDataStructuresAlgorithms
 
             //Act
             int actualValue = trappingWater.Trap(height);
+            output.WriteLine("heights",height[0]);
 
             //Assert
             Assert.Equal(6, actualValue);
 
         }
+
+        [Fact]
+        public void ShouldReturnAmountOfWaterTrapped2()
+        {
+            //Arrange
+            int[] height = new int[] { 4, 2, 0, 3, 2, 5 };
+
+            //Act
+            int actualValue = trappingWater.Trap(height);
+            output.WriteLine("heights", height[0]);
+
+            //Assert
+            Assert.Equal(9, actualValue);
+
+        }
+
+
     }
 }
