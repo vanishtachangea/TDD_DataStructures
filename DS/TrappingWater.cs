@@ -16,8 +16,10 @@ namespace DS
             int rightPointer = len - 1;
             while(leftPointer <rightPointer)
             {
+                //Is height of Left Pointer less than Right Pointer. Choose the Pointer with Lesser Height
                 if(height[leftPointer]<=height[rightPointer])
                 {
+                    //Check whether the height of this Pointer of the Max on that Side
                     if(height[leftPointer]<=maxHeightLeft)
                     {
                         //Calculate Water
@@ -25,6 +27,7 @@ namespace DS
                     }
                     else
                     {
+                        //Update the Max with the current Height because current Height is higher
                         maxHeightLeft = height[leftPointer];
                         
                     }

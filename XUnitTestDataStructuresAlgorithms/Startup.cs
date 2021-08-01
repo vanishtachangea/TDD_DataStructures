@@ -21,8 +21,9 @@ namespace XUnitTestDataStructuresAlgorithms
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
-        {
+        { 
             services.AddTransient<ITrappingWater, TrappingWater>();
+            services.AddTransient<IBinarySearch, BinarySearch>();
         }
     }
 }
