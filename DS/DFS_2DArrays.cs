@@ -92,6 +92,11 @@ namespace DS
             return (int[])traversalResults.ToArray(typeof(int));
         }
 
+        /// <summary>
+        /// T = O(N)
+        /// S = O(N)
+        /// </summary>
+        /// <param name="array2D"></param>
         public void BFS(int[,] array2D)
         {
             Queue<int[]> valuesQueueForBFS = new Queue<int[]>();
@@ -99,14 +104,18 @@ namespace DS
 
             while (valuesQueueForBFS.Count > 0)
             {
+                //DeQueue
                 int[] position = (int[])valuesQueueForBFS.Dequeue();
                 int row = position[0];
                 int col = position[1];
-                
+
                 if (!hashVisited.ContainsKey(GetStringConcatKey(row, col)))
                 {
+                    //Read
                     traversalResults.Add(array2D[row, col]);
                     hashVisited.Add(GetStringConcatKey(row, col), 1);
+
+                    //Enqueue
                     for (int i = 0; i < directions.GetLength(0); i++)
                     {
                         int nextRow = row + directions[i][0];
