@@ -30,7 +30,7 @@ namespace DS
     }
     public class DepthBinaryTree
     {
-
+        //T=O(N) S=O(N) Best Case : O(LogN)
         public int MaxDepth(TreeNode root)
         {
             int cnt = 0;

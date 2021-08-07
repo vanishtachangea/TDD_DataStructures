@@ -24,6 +24,8 @@ namespace XUnitTestDataStructuresAlgorithms
         { 
             services.AddTransient<ITrappingWater, TrappingWater>();
             services.AddTransient<IBinarySearch, BinarySearch>();
+            services.AddTransient<IBinaryTreeLevelOrderTraversal, BinaryTreeLevelOrderTraversal>();
+            
         }
     }
 }
