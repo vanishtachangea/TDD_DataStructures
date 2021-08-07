@@ -8,7 +8,18 @@ namespace DS
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            HashTableCustom h = new HashTableCustom();
+            var watch = new System.Diagnostics.Stopwatch();
+
+            watch.Start();
+
+            for (int i = 0; i < 1000; i++)
+            {
+                Console.Write(i);
+            }
+
+            watch.Stop();
+
+            Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
         }
 
 
