@@ -15,7 +15,7 @@ namespace XUnitTestDataStructuresAlgorithms
             this.output = output;
         }
         [Fact]
-        public void Test1()
+        public void TestDFS()
         {
             //Arrange
             //int[,] array2d = new int[,] { { 10, 20, 30, 40 }, { 11, 21, 31, 41 }, { 12, 22, 32, 42 }, { 13, 23, 33, 43 } };
@@ -34,7 +34,26 @@ namespace XUnitTestDataStructuresAlgorithms
             //Assert
             Assert.Equal(expectedList, actualList);
         }
+        [Fact]
+        public void TestBFS()
+        {
+            //Arrange
+            //int[,] array2d = new int[,] { { 10, 20, 30, 40 }, { 11, 21, 31, 41 }, { 12, 22, 32, 42 }, { 13, 23, 33, 43 } };
+            int[,] array2d = new int[,] { { 10, 20 }, { 11, 21 } };
 
+
+            int[] expectedList = new int[] { 10, 20, 11, 21 };
+
+
+            int[] actualList;
+
+            //Act
+            actualList = this.dFS_2DArrays.TraverseBFS(array2d);
+
+
+            //Assert
+            Assert.Equal(expectedList, actualList);
+        }
 
 
     }
