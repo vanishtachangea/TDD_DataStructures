@@ -15,14 +15,31 @@ namespace XUnitTestDataStructuresAlgorithms
             this.output = output;
         }
         [Fact]
-        public void TestSearch1()
+        public void TestSearchBFS()
         {
             //Arrange
-            GraphBFSUsingAdjacencyList graph = new GraphBFSUsingAdjacencyList();
+            GraphUsingAdjacencyList graph = new GraphUsingAdjacencyList();
             int[] expectedArray = new int[] { 0, 1, 3, 2, 4, 5, 8, 6, 7 };
 
             //Act
             int[] actualArray = graph.BFS();
+
+
+            //Assert
+            Assert.Equal(expectedArray, actualArray);
+        }
+        [Fact]
+        public void TestSearchDFS()
+        {
+            //Arrange
+            GraphUsingAdjacencyList graph = new GraphUsingAdjacencyList();
+            int[] expectedArray = new int[] { 0, 1, 3, 2, 8, 4, 6, 7, 5 };
+
+
+
+
+            //Act
+            int[] actualArray = graph.DFS();
 
 
             //Assert

@@ -16,7 +16,7 @@ namespace DS
             //{
             //    Console.Write(i);
             //}
-            GraphBFSUsingAdjacencyList graph = new GraphBFSUsingAdjacencyList();
+            GraphUsingAdjacencyList graph = new GraphUsingAdjacencyList();
 
             //Act
             graph.BFS();
