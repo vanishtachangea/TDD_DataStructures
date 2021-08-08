@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace DS
 {
@@ -34,7 +35,7 @@ namespace DS
                 set2.IntersectWith(set1);
                 return set2.ToArray();
             }
-            return new int[] { };
+            
 
         }
     }
