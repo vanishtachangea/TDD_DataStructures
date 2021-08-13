@@ -32,7 +32,18 @@ namespace DS
 
             WaysToGetN waysToGetN = new WaysToGetN();
             Console.WriteLine(waysToGetN.WaysToGetN_DC(5));
+            Console.WriteLine(waysToGetN.WaysToGetN_DP_TopDown(5));
 
+            Console.WriteLine(waysToGetN.WaysToGetN_DC(6));
+            Console.WriteLine(waysToGetN.WaysToGetN_DP_TopDown(6));
+
+
+            Console.WriteLine(waysToGetN.WaysToGetN_DC(7));
+            Console.WriteLine(waysToGetN.WaysToGetN_DP_TopDown(7));
+
+            Console.WriteLine(waysToGetN.WaysToGetN_DP_BottomUp(7));
+            Console.WriteLine(waysToGetN.WaysToGetN_DP_BottomUp(7));
+            
 
 
             Console.ReadLine();
