@@ -43,7 +43,6 @@ namespace DS
 
             Console.WriteLine(waysToGetN.WaysToGetN_DP_BottomUp(7));
             Console.WriteLine(waysToGetN.WaysToGetN_DP_BottomUp(7));
-            
 
 
             Console.ReadLine();

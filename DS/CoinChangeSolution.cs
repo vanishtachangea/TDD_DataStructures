@@ -1,57 +1,62 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DS
 {
-    public class CoinChangeSolution
-    {
-        public int CoinChange(int[] coins, int amount)
+
+        public class CoinChangeSolution
         {
-            if (coins.Length == 0)
+            Dictionary<int, int> memoizedValues = new Dictionary<int, int>();
+            public int CoinChange(int[] coins, int amount)
             {
-                return 0;
-            }
-            if (amount == 0)
-            {
-                return 0;
-            }
-            Array.Sort(coins);
-
-
-            int countCoins = 0;
-
-            countCoins = this.CalculateCoins(coins, coins.Length - 1, amount);
-            return countCoins;
-        }
-        public int CalculateCoins(int[] coins, int position, int amount)
-        {
-            int countCoins = 0;
-            int amtRemaining = amount;
-
-            if (position < 0)
-            {
-                return -1;
-            }
-            int i = position;
-            while (i >= 0 || amtRemaining > 0)
-            {
-                int biggestDenominator = (int)Math.Floor(amtRemaining / (coins[i] * 1.0));
-                if (biggestDenominator > 0)
+                if (coins.Length == 0)
                 {
-                    amtRemaining -= (biggestDenominator * coins[i]);
-                    countCoins += biggestDenominator;
+                    return 0;
                 }
-                i--;
+                if (amount <= 0)
+                {
+                    return 0;
+                }
+                return CoinChangeDC(coins, amount);
             }
-            if (amtRemaining > 0)
+            public int CoinChangeDC(int[] coins, int remainingAmount)
             {
-                countCoins = CalculateCoins(coins, position - 1, amount);
+                //Base
+                if (remainingAmount < 0)
+                {
+                    return -1;
+                }
+                if (remainingAmount == 0)
+                {
+                    return 0;
+                }
+                //Add Memoization
+                if (memoizedValues.ContainsKey(remainingAmount))
+                {
+                    return memoizedValues[remainingAmount];
+                }
+                //Recursion
+                int minCoinsCount = Int32.MaxValue;
+                for (int i = 0; i < coins.Length; i++)
+                {
+                    int coinValue = coins[i];
+                    int count = CoinChangeDC(coins, remainingAmount - coinValue);
+                    if (count >= 0 && count < minCoinsCount)
+                    {
+                        minCoinsCount = 1 + count;
+                    }
+
+
+                }
+                if (minCoinsCount == Int32.MaxValue)
+                {
+                    minCoinsCount = -1;
+                }
+                memoizedValues.Add(remainingAmount, minCoinsCount);
+                return memoizedValues[remainingAmount];
             }
-            return countCoins;
-
         }
-
-
-    }
+    
 
 
 }
